@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Assemble bootloader and kernel
+nasm -f bin bootloader.asm -o bootloader.bin
+nasm -f bin kernel.asm -o kernel.bin
+
+# Combine bootloader and kernel into a single image
+cat bootloader.bin kernel.bin > os_image.bin
+
+# Run the image using QEMU
+qemu-system-x86_64 os_image.bin
+
